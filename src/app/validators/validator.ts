@@ -49,7 +49,37 @@ class LoginValidator extends LinValidator{
     }
 }
 
+//更新参数
+class UpdateValidator extends LinValidator{
+    avatar:Rule[]
+    desc:Rule[]
+    company:Rule[]
+    money:Rule[]
+    constructor() {
+        super();
+        this.avatar = [
+            new Rule('isLength','头像不能为空',{
+                min:1
+            })
+        ]
+        this.desc = [
+            new Rule('isLength','简介不能为空',{
+                min:1
+            })
+        ]
+        this.company = [
+            new Rule('isOptional',''),
+            new Rule('isLength','公司不能为空',{min:1})
+        ]
+        this.money = [
+            new Rule('isOptional',''),
+            new Rule('isLength','公司不能为空',{min:1})
+        ]
+    }
+}
+
 export {
     RegisterValidator,
-    LoginValidator
+    LoginValidator,
+    UpdateValidator
 }

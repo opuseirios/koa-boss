@@ -63,11 +63,22 @@ class NotMatchException extends HttpException{
     }
 }
 
+//没有权限
+class ForbiddenException extends HttpException{
+    constructor(msg='没有权限',errorCode=60006) {
+        super();
+        this.code = 403;
+        this.msg = msg;
+        this.errorCode = errorCode;
+    }
+}
+
 export {
     HttpException,
     ParameterException,
     SuccessException,
     ExistException,
     NotFoundException,
-    NotMatchException
+    NotMatchException,
+    ForbiddenException
 }
