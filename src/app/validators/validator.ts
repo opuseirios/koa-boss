@@ -78,8 +78,20 @@ class UpdateValidator extends LinValidator{
     }
 }
 
+//用户列表
+class UserListValidator extends LinValidator{
+    userType:Rule[]
+    constructor() {
+        super();
+        this.userType = [
+            new Rule('isLength','参数不能为空',{min:1})
+        ]
+    }
+}
+
 export {
     RegisterValidator,
     LoginValidator,
-    UpdateValidator
+    UpdateValidator,
+    UserListValidator
 }

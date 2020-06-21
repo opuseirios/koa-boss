@@ -23,7 +23,6 @@ class Auth {
     get m() {
         return async (ctx: Context, next: Next) => {
             const userToken = basicAuth(ctx.req);
-            console.log(userToken);
             let errMsg = 'token不合法'
             let decode: IDecode
             if (!userToken || !userToken.name) {
