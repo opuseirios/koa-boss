@@ -89,9 +89,23 @@ class UserListValidator extends LinValidator{
     }
 }
 
+//阅读消息
+class ReadMsgValidator extends LinValidator{
+    fromId:Rule[]
+    constructor() {
+        super();
+        this.fromId = [
+            new Rule('isLength','fromId未传',{
+                min:1
+            })
+        ]
+    }
+}
+
 export {
     RegisterValidator,
     LoginValidator,
     UpdateValidator,
-    UserListValidator
+    UserListValidator,
+    ReadMsgValidator
 }

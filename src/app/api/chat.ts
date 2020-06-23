@@ -2,6 +2,7 @@ import Router from "koa-router";
 import {Auth} from "../../middlewares/auth";
 import UserModel from '../models/user'
 import ChatModel from '../models/chat'
+import {ReadMsgValidator} from "../validators/validator";
 
 const router = new Router({prefix: '/chat'})
 
@@ -25,5 +26,19 @@ router.get('/list', new Auth().m, async ctx => {
     })
 })
 
+//阅读消息
+router.put('/read', new Auth().m, async ctx => {
+    const v = await new ReadMsgValidator().validate(ctx);
+    const toId = ctx.auth.uid;
+    const fromId = v.get('body.fromId');
+    const result = await ChatModel.update(
+        {from: fromId, to: toId},
+        {'$set': {read: true}},
+        {'multi': true})
+    if (!result) {
+        throw new global.errs.UpdateFailedException()
+    }
+    throw new global.errs.SuccessException({num: result.nModified})
+})
 
 export default router;

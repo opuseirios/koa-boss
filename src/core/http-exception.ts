@@ -73,6 +73,16 @@ class ForbiddenException extends HttpException{
     }
 }
 
+//修改失败
+class UpdateFailedException extends HttpException{
+    constructor(msg='修改失败',errorCode=60010) {
+        super();
+        this.code = 502;
+        this.msg = msg;
+        this.errorCode = errorCode;
+    }
+}
+
 export {
     HttpException,
     ParameterException,
@@ -80,5 +90,6 @@ export {
     ExistException,
     NotFoundException,
     NotMatchException,
-    ForbiddenException
+    ForbiddenException,
+    UpdateFailedException
 }
